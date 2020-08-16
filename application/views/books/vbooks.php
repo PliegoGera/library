@@ -11,6 +11,7 @@
       <th scope="col">Publish date</th>
       <th scope="col">Available</th>
       <th scope="col">usuario</th>
+      <th scope="col">actions</th>
       
       
 
@@ -21,12 +22,13 @@
       <?php if($books) :?>
         <?php foreach ($books as $book) :?>
         <tr>
-            <th scope="row"><?= $book['id']?></th>
-            <td><?= $book['name']?></td>
-            <td><?= $book['author']?></td>
-            <td><?= $book['id_category']?></td>
-            <td><?= $book['publish_date']?></td>
-            <td><?= $book['available']?></td>
+            <th scope="row"><?php echo $book->id?></th>
+            <td><?php echo $book->name?></td>
+            <td><?php echo $book->author?></td>
+            <td><?php echo $book->id_category?></td>
+            <td><?php echo $book->publish_date?></td>
+            <td><?php echo $book->available?></td>
+            <td><?php echo $book->id_user?></td>
             <td><button type="button" class="btn btn-primary">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button></td>
             </tr>
