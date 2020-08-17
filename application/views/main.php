@@ -6,19 +6,11 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Author</th>
-      <th scope="col">Category</th>
-      <th scope="col">Publish date</th>
-      <th scope="col">Available</th>
-      <th scope="col">usuario</th>
-      
-      
-
-      
+      <th scope="col">email</th>
     </tr>
   </thead>
   <tbody>
-      <?php if($books) :?>
+      <?php if($users) :?>
         <?php foreach ($books as $book) :?>
         <tr>
             <th scope="row"><?= $book['id']?></th>

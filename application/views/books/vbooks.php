@@ -1,6 +1,9 @@
 
 
-<div id="container">
+<div id="container" class="container-fluid">
+<button type="button" class="btn btn-primary">
+<a href="<?php echo base_url('books/addbook'); ?>" class="text-white">Add Book</a>
+</button>
 <table class="table">
   <thead>
     <tr>
@@ -25,10 +28,10 @@
             <th scope="row"><?php echo $book->id?></th>
             <td><?php echo $book->name?></td>
             <td><?php echo $book->author?></td>
-            <td><?php echo $book->id_category?></td>
+            <td><?php echo $book->category?></td>
             <td><?php echo $book->publish_date?></td>
             <td><?php echo $book->available?></td>
-            <td><?php echo $book->id_user?></td>
+            <td><?php echo $book->user?></td>
             <td><button type="button" class="btn btn-primary">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button></td>
             </tr>

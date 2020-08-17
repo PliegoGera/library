@@ -8,7 +8,7 @@ class Usermodel extends CI_Model {
         public function get_all_users(){
                 $query = $this->db->get('users');
                 //json_encode($query->result());
-                return json_encode($query->result());
+                return $query->result();
         }
     }
 
