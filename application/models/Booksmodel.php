@@ -44,7 +44,7 @@ class Booksmodel extends CI_Model {
         /**
          * update edited book
          */
-        public function updateBook($param,$id){
+        public function update_book($param,$id){
             $data = array(
                 'name'=>$param['name'],
                 'author'=>$param['author'],
@@ -55,7 +55,15 @@ class Booksmodel extends CI_Model {
             $this->db->where('id', $id);
             return $this->db->update('book', $data);
         }
+        
+        
+
+    public function delete_book($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete('book');
     }
+}
 
     
 ?>

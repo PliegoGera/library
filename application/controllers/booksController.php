@@ -97,7 +97,6 @@ class booksController extends CI_Controller {
             $param['date']=$this->input->post('date');
             $param['user']=$this->input->post('user');
         $this->Booksmodel->save($param);
-
         return redirect('books');
         }
         
@@ -123,11 +122,19 @@ class booksController extends CI_Controller {
             $param['category']=$this->input->post('category');
             $param['date']=$this->input->post('date');
             $param['user']=$this->input->post('user');
-            $this->Booksmodel->updateBook($param,$id);
+            $this->Booksmodel->update_book($param,$id);
 
         return redirect('books');
         }
         
+    }
+
+    public function deleteBook($id)
+    {
+        if($this->Booksmodel-> delete_book($id)){
+			$this->session->set_flashdata('message', 'Deleted Sucessfully');
+			redirect( base_url());  
+		}	
     }
 
 }

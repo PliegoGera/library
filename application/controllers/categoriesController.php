@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class userController extends CI_Controller {
+class categoriesController extends CI_Controller {
 
 
 	 public function __construct(){
 		 parent::__construct();
-		 $this->load->model('Usermodel');
+		 $this->load->model('Categorymodel');
 		 $this->load->helper('url');
 		 $this->load->helper('form');
 		 $this->load->library('form_validation');
@@ -14,29 +14,29 @@ class userController extends CI_Controller {
 	 }
 	public function index()
 	{
-		$data['users'] = $this->Usermodel->get_all_users();
+		$data['categories'] = $this->Categorymodel->get_all_category();
 		$this->load->view('layout/header');
-		$this->load->view('users/vusers',$data);
+		$this->load->view('categories/vcategory',$data);
 		$this->load->view('layout/footer');
 	}
 	   /**
      * view form add user
      */
-    public function addUser()
+    public function addCategory()
 	{
         
         
 		$this->load->view('layout/header');
-		$this->load->view('users/addUser');
+		$this->load->view('categories/addcategory');
         $this->load->view('layout/footer');
         
     }
-    public function editUser($id)
+    public function editCategory($id)
 	{
         
-        $data['users'] = $this->Usermodel->get_all_users_id($id);
+        $data['categories'] = $this->Categorymodel->get_all_category_id($id);
 		$this->load->view('layout/header');
-		$this->load->view('users/editUser',$data);
+		$this->load->view('categories/editcategory',$data);
         $this->load->view('layout/footer');
         
     }
@@ -54,8 +54,8 @@ class userController extends CI_Controller {
                 'rules' => 'required|alpha'
             ),
             array(
-                'field' => 'email',
-                'label' => 'email',
+                'field' => 'description',
+                'label' => 'description',
                 'rules' => 'required',
                 
             )
@@ -65,13 +65,13 @@ class userController extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
     
             $this->load->view('layout/header');
-            $this->load->view('users/addUser');
+            $this->load->view('categories/addCategory');
             $this->load->view('layout/footer');
         }else{
             $param['name']=$this->input->post('name');
-            $param['email']=$this->input->post('email');
-        $this->Usermodel->save($param);
-        return redirect('users');
+            $param['description']=$this->input->post('description');
+        $this->Categorymodel->save($param);
+        return redirect('categories');
         }
         
     }
@@ -79,28 +79,27 @@ class userController extends CI_Controller {
 	{
        
         $this->form_validation->set_rules('name', 'name', 'required');
-        $this->form_validation->set_rules('email', 'email', 'required');
+        $this->form_validation->set_rules('description', 'description', 'required');
 
         
         if ($this->form_validation->run() == FALSE) {
-            $data['categorys'] = $this->Categorymodel->get_all_category();
-            $data['users'] = $this->Usermodel->get_all_users();
+            
             $this->load->view('layout/header');
-            $this->load->view('users/edituser',$data);
+            $this->load->view('categories/editCategory');
             $this->load->view('layout/footer');
         }else{
             $param['name']=$this->input->post('name');
-            $param['email']=$this->input->post('email');
-            $this->Usermodel->update_users($param,$id);
+            $param['description']=$this->input->post('description');
+            $this->Categorymodel->update_category($param,$id);
 
-        return redirect('users');
+        return redirect('categories');
         }
         
     }
 
-    public function deleteUser($id)
+    public function deleteCategory($id)
     {
-        if($this->Usermodel-> delete_users($id)){
+        if($this->Categorymodel-> delete_category($id)){
 			$this->session->set_flashdata('message', 'Deleted Sucessfully');
 			redirect( base_url());  
 		}	

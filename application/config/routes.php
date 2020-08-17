@@ -53,6 +53,16 @@ $route['default_controller'] = 'booksController';
 $route['books'] = 'booksController';
 $route['books/addbook'] = 'booksController/addBook';
 $route['books/editbook/(:any)'] = 'booksController/editBook/$1';
+$route['books/deletebook/(:any)'] = 'booksController/deleteBook/$1';
+
 $route['users'] = 'userController';
+$route['users/adduser'] = 'userController/addUser';
+$route['users/edituser/(:any)'] = 'userController/editUser/$1';
+$route['users/deleteuser/(:any)'] = 'userController/deleteUser/$1';
+
+$route['categories'] = 'categoriesController';
+$route['categories/addcategory'] = 'categoriesController/addCategory';
+$route['categories/editcategory/(:any)'] = 'categoriesController/editCategory/$1';
+$route['categories/deletecategory/(:any)'] = 'categoriesController/deleteCategory/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
