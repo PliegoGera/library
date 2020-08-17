@@ -12,6 +12,7 @@ class booksController extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->library("session");
 	 }
 	public function index()
 	{
@@ -20,14 +21,34 @@ class booksController extends CI_Controller {
 		$this->load->view('books/vbooks',$data);
 		$this->load->view('layout/footer');
     }
+    /**
+     * view form add book
+     */
     public function addBook()
 	{
+        
         $data['categorys'] = $this->Categorymodel->get_all_category();
         $data['users'] = $this->Usermodel->get_all_users();
 		$this->load->view('layout/header');
 		$this->load->view('books/addBook',$data);
-		$this->load->view('layout/footer');
+        $this->load->view('layout/footer');
+        
     }
+    public function editBook($id)
+	{
+        $data['books'] = $this->Booksmodel->get_all_books_id($id);
+        $data['categorys'] = $this->Categorymodel->get_all_category();
+        $data['users'] = $this->Usermodel->get_all_users();
+		$this->load->view('layout/header');
+		$this->load->view('books/editBook',$data);
+        $this->load->view('layout/footer');
+        
+    }
+    
+
+    /**
+     * validate and save  form data
+     */
     public function store()
 	{
         $rules = array(
@@ -69,7 +90,44 @@ class booksController extends CI_Controller {
             $this->load->view('layout/header');
             $this->load->view('books/addBook',$data);
             $this->load->view('layout/footer');
+        }else{
+            $param['name']=$this->input->post('name');
+            $param['author']=$this->input->post('author');
+            $param['category']=$this->input->post('category');
+            $param['date']=$this->input->post('date');
+            $param['user']=$this->input->post('user');
+        $this->Booksmodel->save($param);
+
+        return redirect('books');
         }
         
-	}
+    }
+    public function update($id)
+	{
+       
+        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('author', 'author', 'required');
+        $this->form_validation->set_rules('category', 'category', 'required');
+        $this->form_validation->set_rules('date', 'date', 'required');
+        $this->form_validation->set_rules('user', 'user', 'required');
+        
+        if ($this->form_validation->run() == FALSE) {
+            $data['categorys'] = $this->Categorymodel->get_all_category();
+            $data['users'] = $this->Usermodel->get_all_users();
+            $this->load->view('layout/header');
+            $this->load->view('books/editbook',$data);
+            $this->load->view('layout/footer');
+        }else{
+            $param['name']=$this->input->post('name');
+            $param['author']=$this->input->post('author');
+            $param['category']=$this->input->post('category');
+            $param['date']=$this->input->post('date');
+            $param['user']=$this->input->post('user');
+            $this->Booksmodel->updateBook($param,$id);
+
+        return redirect('books');
+        }
+        
+    }
+
 }

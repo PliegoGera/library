@@ -1,6 +1,7 @@
 
 
 <div id="container" class="container-fluid">
+    
 <button type="button" class="btn btn-primary">
 <a href="<?php echo base_url('books/addbook'); ?>" class="text-white">Add Book</a>
 </button>
@@ -32,7 +33,7 @@
             <td><?php echo $book->publish_date?></td>
             <td><?php echo $book->available?></td>
             <td><?php echo $book->user?></td>
-            <td><button type="button" class="btn btn-primary">Edit</button>
+            <td><button type="button" class="btn btn-primary" ><a href="<?php echo base_url('books/editbook/'.$book->id.''); ?>" class="text-white">Edit</a></button>
             <button type="button" class="btn btn-danger">Delete</button></td>
             </tr>
         <?php endforeach ?>
